@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { CgDetailsMore ,CgCross } from "react-icons/cg";
+import { CgDetailsMore } from "react-icons/cg";
+import { RxCross2 } from "react-icons/rx";
 import gsap from "gsap";
 import ScrollTrigger from "gsap/src/ScrollTrigger";
 import { useLocation, Link } from "react-router-dom";
@@ -56,7 +57,7 @@ const NavBar = () => {
       {openNav&&<div className="h-[40vh] z-10 overflow-hidden absolute top-0 left-0 w-[100vw] bg-white lg:hidden text-red-800">
         <div className="h-16 w-full flex items-center justify-between px-8">
          <div>Logo</div>
-         <div><CgCross onClick={()=>setOpenNav(false)}/></div>
+         <div><RxCross2 className="text-4xl" onClick={()=>setOpenNav(false)}/></div>
         </div>
         <div className="text-gray-700 w-full h-full gap-4 flex items-center flex-col mt-10 text-3xl">
         <Link to={'/'}><h1 className={`${(location.pathname == "/")?'text-red-700':null}`}>Home</h1></Link>

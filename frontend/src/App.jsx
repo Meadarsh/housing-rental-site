@@ -5,6 +5,7 @@ import { BrowserRouter, Routes,Route, Outlet } from "react-router-dom";
 import Rent from "./Rent/Rent";
 import PG from "./Pg/Pg";
 import AdminPage from "./Admin/AdminPage";
+import Contact from "./contact/contact";
 
 function App() {
 
@@ -17,6 +18,7 @@ function App() {
       <Route path="/" element={<Home/>} />
       <Route path="/rent" element={<Rent/>} />
       <Route path="/pg" element={<PG/>} />
+      <Route path="/contact" element={<Contact/>} />
       <Route path="/admin" element={<AdminPage/>} />
     </Routes>
 
