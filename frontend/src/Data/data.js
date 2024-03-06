@@ -28,3 +28,12 @@ export const PGPageSlider =[ "/Images/pg1.jpg",
 "/Images/pg2.jpg",
 "/Images/pg3.jpg",
 "/Images/pg4.jpg",]
+
+export const LandingPageSlider=['/Images/landing1.jpg','/Images/landing2.jpg','/Images/landing3.jpg','/Images/landing4.jpg']
+
+export const LandingPageTxt=[` Discover the perfect flat for rent with our hassle-free
+platform.
+Find comfort, convenience, and style in every listing.`,`Unlock the door to your ideal flat with just a few clicks.
+Begin your journey to a new living space that feels just right.`,`Tailor your search to your exact needs and preferences.
+Instantly find flats that match your criteria for a personalized experience.`,`Your safety and satisfaction are our top priorities.
+Trust in our secure rental platform for a worry-free experience.`]

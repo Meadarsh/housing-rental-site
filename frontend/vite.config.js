@@ -9,4 +9,10 @@ export default defineConfig({
        '/api':'http://localhost:8081'
       } }},
   plugins: [react()],
+  "rewrites": [
+    {
+      "source": "/(.*)",
+      "destination": "/index.html"
+    }
+  ]
 })

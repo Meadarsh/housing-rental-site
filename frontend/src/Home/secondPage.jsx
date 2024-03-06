@@ -7,7 +7,7 @@ import {BrowseRentalList } from "../Data/data";
 
 const SecondPage = () => {
   return (
-    <div className=" w-full">
+    <div className="mt-10 w-full">
       <div className="flex justify-center items-center h-[10vh]">
         <h1 className="lg:text-[2vw] text-xl text-center text-red-800">
           Find the perfect space that feels like home across vibrant cities and
@@ -36,10 +36,9 @@ const SecondPage = () => {
           <Swiper
           modules={[Autoplay]}
             slidesPerView={1}
-          
             autoplay={{ delay: 3000, disableOnInteraction: false }}
             loop={true}
-            className="w-full lg:w-[40%] lg:h-full h-[50vh] overflow-hidden"
+            className="w-full lg:w-[40%] lg:rounded-2xl overflow-hidden lg:h-full h-[50vh]"
           >
             {data.Img.map((path) => (
               <SwiperSlide>

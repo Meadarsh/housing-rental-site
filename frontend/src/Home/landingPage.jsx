@@ -1,31 +1,47 @@
-import React from 'react'
-import { useEffect } from 'react'
-import gsap from 'gsap'
+import React from "react";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Autoplay, EffectFade } from "swiper/modules";
+import "swiper/css";
+import 'swiper/css/effect-fade';
+import "swiper/css/navigation";
+import { LandingPageSlider,LandingPageTxt } from "../Data/data";
 
 const LandingPage = () => {
-
-    useEffect(()=>{
-        gsap.to('.txt h1 ', {
-           y:1,
-           duration: 1,
-           ease:"power2",
-           stagger: 0.1,
-        }),
-        gsap.to('.landingmain', {
-          height:'90vh',
-          delay:1.5,
-          duration: 1.2,
-          ease:"power2",
-    })
-  },[])
   return (
-    <div className='landingmain h-[100vh] relative w-[100vw]'>
-        <img className=' brightness-75 w-full h-full object-cover' src="home.jpg" alt="" />
-        <div className="txt h-full w-full text-white lg:text-[8vw] text-[15vw] font-semibold absolute z-10 top-0 flex  justify-center">
-        <div className=' lg:h-[8vw] h-[14vw] mt-[40vh] flex gap-1 overflow-hidden leading-none'><h1 className='translate-y-full '>P</h1><h1 className='translate-y-full leading-none'>G</h1><h1 className='translate-y-full leading-none'>W</h1><h1 className='translate-y-full leading-none'>A</h1><h1 className='translate-y-full leading-none'>L</h1><h1 className='translate-y-full leading-none'>A</h1></div>
+    <div className=" h-[100vh] flex items-center justify-center relative w-[100vw]">
+      <div className="h-[calc(90vh-60px)] relative mt-10 lg:w-[95%] w-[98%] rounded-3xl bg-slate-200">
+        <Swiper
+          modules={[EffectFade,Autoplay]}
+          slidesPerView={1}
+          autoplay={{ delay: 4000, disableOnInteraction: false }}
+          loop={true}
+          effect="fade"
+          className="w-full h-full object-cover rounded-2xl overflow-hidden"
+        >
+          {LandingPageSlider.map((path,index) => (
+            <SwiperSlide key={index} className="relative">
+              <img
+                src={path}
+                alt="N/a"
+                className="w-full h-full object-cover m-auto"
+              />
+              <div className="absolute top-[80%] w-full lg:w-[60%] left-[50%] origin-center translate-x-[-50%] text-white ">
+                <p className="lg:text-3xl font-semibold text-red-800 text-center">
+                 {LandingPageTxt.at(index)}
+                  </p>
+              </div>
+            </SwiperSlide>
+          ))}
+        </Swiper>
+        <div className="txt lg:w-[60%] absolute top-[10vh] left-8 z-10">
+          <h1 className=" lg:leading-snug font-semibold text-xl lg:text-[2vw]">
+            <span className="text-red-800 font-bold text-4xl lg:text-[5vw]">THEFLAT4U</span>
+            <br /> Discover Your Home in the Heart of India!
+          </h1>
         </div>
+      </div>
     </div>
-  )
-}
+  );
+};
 
-export default LandingPage
+export default LandingPage;
