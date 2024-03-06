@@ -9,7 +9,7 @@ import { LandingPageSlider,LandingPageTxt } from "../Data/data";
 const LandingPage = () => {
   return (
     <div className=" h-[100vh] flex items-center justify-center relative w-[100vw]">
-      <div className="h-[calc(100vh-60px)] relative mt-10 w-full rounded-3xl bg-slate-200">
+      <div className="h-[calc(100vh-64px)] relative mt-14 w-full bg-slate-200">
         <Swiper
           modules={[EffectFade,Autoplay]}
           slidesPerView={1}
