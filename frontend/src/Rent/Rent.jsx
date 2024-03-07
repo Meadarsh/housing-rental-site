@@ -6,6 +6,7 @@ import 'swiper/css/navigation';
 import 'swiper/swiper-bundle.css';
 import { RentPageSlider } from '../Data/data';
 import Card from '../Components/card';
+import Footer from '../Components/footer';
 
 const Rent = () => {
   return (
@@ -33,7 +34,7 @@ const Rent = () => {
           <Card/>
          
         </div>
-         
+         <Footer/>
     </div>
   )
 }

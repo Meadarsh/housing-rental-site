@@ -1,16 +1,21 @@
 import React, { useEffect, useState } from "react";
-import { MdRemoveShoppingCart } from "react-icons/md";
 
 const AddProperty = () => {
-  const [selectedFurnish, setSelectedCountry] = useState("");
-  const [price, setPrice] = useState();
-  const [type, setType] = useState("");
-  const [address, setAddress] = useState("");
-  const [state, setState] = useState("");
-  const [city, setCity] = useState("");
-  const [carpetArea, setCarpetArea] = useState();
-  const [bathroom, setBathroom] = useState();
-  const [totalFloor, setTotalfloor] = useState();
+
+  const [rent, setRent] = useState('');
+  const [securityDeposit, setSecurityDeposit] = useState('');
+  const [address, setAddress] = useState('');
+  const [city, setCity] = useState('');
+  const [state, setState] = useState('');
+  const [carpetArea, setCarpetArea] = useState('');
+  const [furnishing, setFurnishing] = useState('0'); // default to "null"
+  const [flatType, setFlatType] = useState('0'); // default to "null"
+  const [bathroom, setBathroom] = useState('0'); // default to "null"
+  const [parking, setParking] = useState('0'); // default to "null"
+  const [balcony, setBalcony] = useState('0'); // default to "null"
+  const [totalFloor, setTotalFloor] = useState('');
+  const [onFloor, setOnFloor] = useState('');
+  const [tenantsPreferred, setTenantsPreferred] = useState('Both');
   const [selectedItems, setSelectedItems] = useState([]);
   const [selectedBuildingItems, setSelectedBuildingItems] = useState([]);
   const [amenities, setAmenities] = useState({
@@ -79,6 +84,7 @@ const AddProperty = () => {
     }
     upload();
   }, []);
+ 
 
   return (
     <div>
@@ -95,6 +101,8 @@ const AddProperty = () => {
                   placeholder="Rent per month"
                   class="w-full bg-gray-200 rounded-md border-gray-700 text-black px-2 py-1"
                   type="number"
+                  onChange={(e)=>setRent(e.target.value)}
+                  value={rent}
                 />
               </div>
               <div class="mt-4">
@@ -105,6 +113,8 @@ const AddProperty = () => {
                   placeholder="Enter security deposit"
                   class="w-full bg-gray-200 rounded-md border-gray-700 text-black px-2 py-1"
                   type="number"
+                  onChange={(e)=>setSecurityDeposit(e.target.value)}
+                  value={securityDeposit}
                 />
               </div>
 
@@ -116,7 +126,10 @@ const AddProperty = () => {
                   placeholder="Address"
                   class="w-full bg-gray-200 rounded-md border-gray-700 text-black px-2 py-1"
                   id="address"
+                  onChange={(e)=>setAddress(e.target.value)}
+                  value={address}
                 ></textarea>
+
               </div>
 
               <div class="mt-4 flex flex-col lg:flex-row space-x-2">
@@ -129,6 +142,8 @@ const AddProperty = () => {
                     class="w-full bg-gray-200 rounded-md border-gray-700 text-black px-2 py-1"
                     id="city"
                     type="text"
+                    onChange={(e) => setCity( e.target.value)}
+                    value={city}
                   />
                 </div>
 
@@ -141,6 +156,8 @@ const AddProperty = () => {
                     class="w-full bg-gray-200 rounded-md border-gray-700 text-black px-2 py-1"
                     id="state"
                     type="text"
+                    onChange={(e) => setState(e.target.value)}
+                    value={state}
                   />
                 </div>
               </div>
@@ -155,6 +172,8 @@ const AddProperty = () => {
                     class="w-full bg-gray-200 rounded-md border-gray-700 text-black px-2 py-1"
                     id="zip"
                     type="number"
+                    onChange={(e)=>setCarpetArea(e.target.value)}
+                    value={carpetArea}
                   />
                 </div>
 
@@ -164,8 +183,8 @@ const AddProperty = () => {
                       Furnishing
                     </label>
                     <select
-                      onChange={handleFurnishChange} // Attach the change event handler
-                      value={selectedFurnish}
+                      onChange={(e)=>setFurnishing(e.target.value)} // Attach the change event handler
+                      value={furnishing}
                       class="w-full bg-gray-200 rounded-md border-gray-700 text-black px-2 py-1"
                       id="country"
                     >
@@ -186,6 +205,8 @@ const AddProperty = () => {
                   <select
                     class="w-full bg-gray-200 rounded-md border-gray-700 text-black px-2 py-1"
                     id="country"
+                    onChange={(e) => setFlatType(e.target.value)}
+                    value={flatType}
                   >
                     <option value="0">null</option>
                     <option value="1R">1R</option>
@@ -203,6 +224,8 @@ const AddProperty = () => {
                     <select
                       class="w-full bg-gray-200 rounded-md border-gray-700 text-black px-2 py-1"
                       id="country"
+                      onChange={(e) => setBathroom(e.target.value)}
+                      value={bathroom}
                     >
                       <option value="0">null</option>
                       <option value="1">1</option>
@@ -220,6 +243,8 @@ const AddProperty = () => {
                     <select
                       class="w-full bg-gray-200 rounded-md border-gray-700 text-black px-2 py-1"
                       id="country"
+                      onChange={(e) => setParking(e.target.value)}
+                      value={parking}
                     >
                       <option value="0">null</option>
                       <option value="0">Not available</option>
@@ -236,6 +261,8 @@ const AddProperty = () => {
                   <select
                     class="w-full bg-gray-200 rounded-md border-gray-700 text-black px-2 py-1"
                     id="country"
+                    onChange={(e) => setBalcony(e.target.value)}
+                    value={balcony}
                   >
                     <option value="0">null</option>
                     <option value="1">1</option>
@@ -247,15 +274,17 @@ const AddProperty = () => {
                 <div class="flex flex-row space-x-2">
                   <div class="flex-1">
                     <label class="text-black" for="country">
-                      Parking
+                    Tenants Preferred
                     </label>
                     <select
                       class="w-full bg-gray-200 rounded-md border-gray-700 text-black px-2 py-1"
                       id="country"
+                      onChange={(e)=>setTenantsPreferred(e.target.value)}
+                      value={tenantsPreferred}
                     >
-                      <option value="0">null</option>
-                      <option value="0">Not available</option>
-                      <option value="1">Available</option>
+                      <option value="Both">Both</option>
+                      <option value="Bachelors">Bachelors</option>
+                      <option value="Family">Family</option>
                     </select>
                   </div>
                 </div>
@@ -269,6 +298,8 @@ const AddProperty = () => {
                       class="w-full bg-gray-200 rounded-md border-gray-700 text-black px-2 py-1"
                       id="zip"
                       type="number"
+                      onChange={(e)=>setTotalFloor(e.target.value)}
+                      value={totalFloor}
                     />
                   </div>
                   <div class="flex-1">
@@ -280,10 +311,13 @@ const AddProperty = () => {
                       class="w-full bg-gray-200 rounded-md border-gray-700 text-black px-2 py-1"
                       id="zip"
                       type="number"
+                      onChange={(e)=>setOnFloor(e.target.value)}
+                      value={onFloor}
                     />
                   </div>
                 </div>
               </div>
+             
             </div>
             <div className="lg:border-l-2 lg:pl-3 lg:w-[20vw] flex flex-col justify-between">
               <h1 className="text-xl font-semibold">Building Amenities:</h1>

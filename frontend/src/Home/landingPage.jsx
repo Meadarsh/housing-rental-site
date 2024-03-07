@@ -26,7 +26,7 @@ const LandingPage = () => {
                 className="w-full h-full object-cover m-auto"
               />
               <div className="absolute top-[80%] w-full lg:w-[60%] left-[50%] origin-center translate-x-[-50%] text-white ">
-                <p className="lg:text-3xl font-semibold text-red-800 text-center">
+                <p className="lg:text-[2vw] font-semibold text-red-700 text-center">
                  {LandingPageTxt.at(index)}
                   </p>
               </div>

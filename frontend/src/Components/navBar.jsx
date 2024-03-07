@@ -24,6 +24,7 @@ const NavBar = () => {
     <>
     <div className=" mainNav w-[100vw] left-0 lg:h-20 h-16 z-50 fixed top-0 flex justify-between items-center lg:px-10 px-8">
       <div>Logo</div>
+      <Link to='/admin'>Admin</Link>
       <div className="lg:flex justify-end gap-4 hidden  w-[20%] ">
        
           {!(location.pathname == "/")&&(

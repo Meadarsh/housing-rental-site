@@ -1,11 +1,41 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import {Autoplay} from "swiper/modules"
 import "swiper/css";
 import 'swiper/css/navigation';
 import {BrowseRentalList } from "../Data/data";
+import gsap from  "gsap";
+import ScrollTrigger from "gsap/src/ScrollTrigger";
 
 const SecondPage = () => {
+
+  useEffect(()=>{
+  gsap.registerPlugin(ScrollTrigger)
+
+    gsap.to('.homepagepara',{
+      color:'black',
+      duration:1,
+      delay:.2,
+      scrollTrigger:{
+        trigger: '.homepagepara',
+        start: 'top 90%',
+        end:  'bottom bottom',
+      },
+      stagger:.3
+    })
+    gsap.to('.homepageswiper',{
+      scale:1,
+      opacity:1,
+      duration:1,
+      scrollTrigger:{
+        trigger: '.homepageswiper',
+        start: 'top 90%',
+        end:  'bottom bottom',
+      },
+      stagger: .3
+    })
+  })
+
   return (
     <div className="mt-10 w-full">
       <div className="flex justify-center items-center h-[10vh]">
@@ -32,13 +62,13 @@ const SecondPage = () => {
             Browse Rentals
           </h1>
         </div>
-        {BrowseRentalList.map((data)=>(<div className="flex mt-12 lg:flex-row flex-col justify-between items-center lg:h-[50vh] h-[70vh]">
+        {BrowseRentalList.map((data)=>(<div className="flex mt-12 lg:flex-row flex-col justify-between items-center lg:h-[40vh] h-[65vh]">
           <Swiper
           modules={[Autoplay]}
             slidesPerView={1}
             autoplay={{ delay: 3000, disableOnInteraction: false }}
             loop={true}
-            className="w-full lg:w-[40%] lg:rounded-2xl overflow-hidden lg:h-full h-[50vh]"
+            className=" homepageswiper scale-95 opacity-50 w-full lg:w-[40%] lg:rounded-2xl overflow-hidden lg:h-full h-[50vh]"
           >
             {data.Img.map((path) => (
               <SwiperSlide>
@@ -47,8 +77,8 @@ const SecondPage = () => {
             ))}
           </Swiper>
           <div className="w-full lg:w-[50%] lg:h-full flex flex-col lg:pr-[4vw] p-4 justify-center ">
-            <h1 className="lg:text-5xl text-3xl">{data.Heading}</h1>
-            <p className="lg:text-3xl text-xl text-slate-600">
+            <h1 className="lg:text-4xl text-2xl">{data.Heading}</h1>
+            <p className=" homepagepara lg:text-2xl text-lg text-white">
              {data.Paragraph}
             </p>
           </div>

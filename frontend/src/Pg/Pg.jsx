@@ -6,6 +6,7 @@ import 'swiper/css/navigation';
 import 'swiper/swiper-bundle.css';
 import { PGPageSlider } from '../Data/data';
 import Card from '../Components/card';
+import Footer from '../Components/footer';
 
 const PG = () => {
   return (
@@ -33,6 +34,7 @@ const PG = () => {
           <Card/>
          
         </div>
+        <Footer/>
          
     </div>
   )
