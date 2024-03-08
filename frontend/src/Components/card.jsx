@@ -21,7 +21,7 @@ const Card = ({data}) => {
  }
   return (
     <div style={{ boxShadow: 'rgba(0, 0, 0, 0.15) 0px 5px 15px 0px' }} className="flex flex-col pb-3  gap-2 lg:flex-row lg:w-[80%] flex-shrink-0 w-[97%] overflow-x-hidden items-center lg:items-start  mt-2 lg:mt-4 rounded-md lg:p-5 p-2 bg-white justify-between">
-      <div className="img w-[99%] rounded-lg overflow-hidden lg:w-[25%] h-[30vh]  bg-slate-300">
+      <div className="img w-[99%] rounded-lg overflow-hidden lg:w-[25%] h-[20vh] lg:h-[30vh]  bg-slate-300">
       <Swiper
           modules={[Autoplay,Navigation]}
             slidesPerView={1}
