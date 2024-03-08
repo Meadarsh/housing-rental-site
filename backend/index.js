@@ -1,9 +1,13 @@
 // Server-Side (Node.js)
+import dotenv from 'dotenv'
 import  express  from "express";
 import cors from "cors"
 import mongoose from "mongoose";
 import {v2  as cloudinary} from 'cloudinary'
 import { Flats } from "./schema/schema.js";
+dotenv.config({
+  path:'./env'
+})
 
 cloudinary.config({
   cloud_name: 'cloud-space',
