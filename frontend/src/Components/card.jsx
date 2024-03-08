@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 import { IoCall } from "react-icons/io5";
 import { RxCross2 } from "react-icons/rx";
 import { Swiper, SwiperSlide } from "swiper/react";
-import {Autoplay} from "swiper/modules"
+import {Autoplay,Navigation} from "swiper/modules"
 import "swiper/css";
 import 'swiper/css/navigation';
 import { RentPageSlider } from "../Data/data";
@@ -23,9 +23,8 @@ const Card = ({data}) => {
     <div style={{ boxShadow: 'rgba(0, 0, 0, 0.15) 0px 5px 15px 0px' }} className="flex flex-col pb-3  gap-2 lg:flex-row lg:w-[80%] flex-shrink-0 w-[97%] overflow-x-hidden items-center lg:items-start  mt-2 lg:mt-4 rounded-md lg:p-5 p-2 bg-white justify-between">
       <div className="img w-[99%] rounded-lg overflow-hidden lg:w-[25%] h-[30vh]  bg-slate-300">
       <Swiper
-          modules={[Autoplay]}
+          modules={[Autoplay,Navigation]}
             slidesPerView={1}
-            autoplay={{ delay: 3000, disableOnInteraction: false }}
             loop={true}
             className=" homepageswiper w-full lg:rounded-2xl overflow-hidden lg:h-full "
           >
