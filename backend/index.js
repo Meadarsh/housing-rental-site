@@ -20,7 +20,7 @@ const app = express();
 app.use(express.json());
 const PORT = process.env.PORT||3001;
 app.use(cors({
-    origin:'https://pgwala.vercel.app/'
+    origin:'https://pgwala.vercel.app'
 }))
  // Connect to the database
 
