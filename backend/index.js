@@ -3,7 +3,7 @@ import  express  from "express";
 import cors from "cors"
 import mongoose from "mongoose";
 import {v2  as cloudinary} from 'cloudinary'
-import { Flats } from "./schema/Schema.js";
+import { Flats } from "./schema/schema.js";
 
 cloudinary.config({
   cloud_name: 'cloud-space',
@@ -14,7 +14,7 @@ cloudinary.config({
 
 const app = express();
 app.use(express.json());
-const PORT = 3001;
+const PORT = process.env.PORT||3001;
 app.use(cors({
     origin:"http://localhost:5173"
 }))
