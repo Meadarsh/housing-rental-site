@@ -3,7 +3,7 @@ import  express  from "express";
 import cors from "cors"
 import mongoose from "mongoose";
 import {v2  as cloudinary} from 'cloudinary'
-import { Flats } from "./schema/schema.js";
+import { Flats } from "./schema/Schema.js";
 
 cloudinary.config({
   cloud_name: 'cloud-space',
