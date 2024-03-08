@@ -8,21 +8,10 @@ import { useLocation, Link } from "react-router-dom";
 const NavBar = () => {
   const location = useLocation();
  const [openNav,setOpenNav]=useState(false)
-  gsap.registerPlugin(ScrollTrigger);
-  useEffect(() => {
-    gsap.to(".mainNav", {
-      backdropFilter: "blur(7px)",
-      duration: 0.8,
-      scrollTrigger: {
-        trigger: ".mainNav",
-        start: "400% top",
-        scrub: true,
-      },
-    });
-  });
+  
   return (
     <>
-    <div className=" mainNav w-[100vw] left-0 lg:h-20 h-16 z-50 fixed top-0 flex justify-between items-center lg:px-10 px-8">
+    <div className=" backdrop-blur-sm mainNav w-[100vw] left-0 lg:h-20 h-16 z-50 fixed top-0 flex justify-between items-center lg:px-10 px-8">
       <div>Logo</div>
       <Link to='/admin'>Admin</Link>
       <div className="lg:flex justify-end gap-4 hidden  w-[20%] ">

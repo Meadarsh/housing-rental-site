@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from "react";
-
 const AddProperty = () => {
-
+  const[calling,setCalling]=useState(true)
+  const [rentalType, setRentalType] = useState("");
   const [rent, setRent] = useState('');
+  const [singleSharingRent, setSingleSharingRent] = useState('');
+  const [twinSharingRent, setTwinSharingRent] = useState('');
   const [securityDeposit, setSecurityDeposit] = useState('');
   const [address, setAddress] = useState('');
   const [city, setCity] = useState('');
@@ -15,9 +17,10 @@ const AddProperty = () => {
   const [balcony, setBalcony] = useState('0'); // default to "null"
   const [totalFloor, setTotalFloor] = useState('');
   const [onFloor, setOnFloor] = useState('');
-  const [tenantsPreferred, setTenantsPreferred] = useState('Both');
+  const [tenantsPreferred, setTenantsPreferred] = useState('Independent');
   const [selectedItems, setSelectedItems] = useState([]);
   const [selectedBuildingItems, setSelectedBuildingItems] = useState([]);
+  const [selectedImages,setSelectedImages]=useState([])
   const [amenities, setAmenities] = useState({
     visitorsEntry: "",
     drinking: "",
@@ -25,6 +28,29 @@ const AddProperty = () => {
     food: "",
     kitchen: "",
   });
+  const allStateValues = {
+    rentalType,
+    rent,
+    singleSharingRent,
+    twinSharingRent,
+    securityDeposit,
+    address,
+    city,
+    state,
+    carpetArea,
+    furnishing,
+    flatType,
+    bathroom,
+    parking,
+    balcony,
+    totalFloor,
+    onFloor,
+    tenantsPreferred,
+    selectedItems,
+    selectedBuildingItems,
+    amenities,
+    imageUrl:[]
+  };
 
   const handleRadioChange = (category, value) => {
     setAmenities((prevAmenities) => ({
@@ -45,7 +71,6 @@ const AddProperty = () => {
         prevSelectedItems.filter((item) => item !== itemName)
       );
     }
-    console.log("flat", selectedItems);
   };
   const handleCheckboxChangeBuilding = (event) => {
     const itemName = event.target.value;
@@ -61,36 +86,72 @@ const AddProperty = () => {
         prevSelectedItems.filter((item) => item !== itemName)
       );
     }
-    console.log("building", selectedBuildingItems);
   };
 
-  const handleFurnishChange = (event) => {
-    setSelectedCountry(event.target.value);
-    console.log(event.target.value);
-  };
+  function SelectImage(e){
+    let fileInput = e.target;
+    let files = fileInput.files;
+    setSelectedImages(files);
+  }
 
-  useEffect(() => {
-    async function upload() {
-      let response = await fetch("http://localhost:3001/", {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-        },
+const handleSubmit = async () => {
+
+   if(calling){if(!rentalType){
+    setCalling(false)
+    alert('Please select a rental type');
+    return false;
+   }
+   let uploadedImages;
+  if(!(selectedImages).length==0){ uploadedImages = await Promise.all(
+    Array.from(selectedImages).map(async (file) => {
+      const formData = new FormData();
+      formData.append('file', file);
+      formData.append('upload_preset', 'ypij3fxm');
+
+      const response = await fetch('https://api.cloudinary.com/v1_1/cloud-space/image/upload', {
+        method: 'POST',
+        body: formData,
       });
-      if (response.ok) {
-        const data = await response.json();
-        console.log("datatat", data);
-      }
-    }
-    upload();
-  }, []);
+
+      const data = await response.json();
+      return data.secure_url;
+    })
+  );
+  
+}
+Upload(uploadedImages)}
+};
+const Upload= async(imgUrl)=>{
+  allStateValues.imageUrl= imgUrl
+  const result = await fetch(`${import.meta.env.VITE_BASE_URL}/upload`, {
+    method: "post",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ allStateValues}),
+  });
+  
+  if (result.ok) {
+    setCalling(true)
+    alert("upload");
+  }
+}
  
 
   return (
     <div>
-      <div className="flex justify-center">
+      <div className="flex mb-10 justify-center">
         <div class="mt-2 lg:mt-8 flex lg:w-[80vw] flex-col bg-white border shadow-md rounded-lg p-4">
-          <h2 class="text-black font-bold text-lg">Add flat for rent</h2>
+          <h2 class="text-black font-bold text-lg">Add  <select
+                      onChange={(e)=>setRentalType(e.target.value)} // Attach the change event handler
+                      value={rentalType}
+                      class="bg-gray-200 rounded-md border border-red-500  text-black px-2 py-1"
+                      id="country"
+                    >
+                      <option value="">null</option>
+                      <option value="Flat">Flat</option>
+                      <option value="Pg">Pg</option>
+                    </select> for rent</h2>
           <div className="lg:flex lg:gap-5">
             <div>
               <div class="mt-4">
@@ -104,6 +165,32 @@ const AddProperty = () => {
                   onChange={(e)=>setRent(e.target.value)}
                   value={rent}
                 />
+              </div>
+              <div class="mt-4 flex gap-2">
+               <div >
+               <label class="text-black" for="name">
+                  Single sharing rent
+                </label>
+                <input
+                  placeholder="Rent per month"
+                  class="w-full bg-gray-200 rounded-md border-gray-700 text-black px-2 py-1"
+                  type="number"
+                  onChange={(e)=>setSingleSharingRent(e.target.value)}
+                  value={singleSharingRent}
+                />
+               </div>
+               <div>
+               <label class="text-black" for="name">
+                  Twin sharing rent
+                </label>
+                <input
+                  placeholder="Rent per month"
+                  class="w-full bg-gray-200 rounded-md border-gray-700 text-black px-2 py-1"
+                  type="number"
+                  onChange={(e)=>setTwinSharingRent(e.target.value)}
+                  value={twinSharingRent}
+                />
+               </div>
               </div>
               <div class="mt-4">
                 <label class="text-black" for="name">
@@ -208,7 +295,7 @@ const AddProperty = () => {
                     onChange={(e) => setFlatType(e.target.value)}
                     value={flatType}
                   >
-                    <option value="0">null</option>
+                    <option value="">null</option>
                     <option value="1R">1R</option>
                     <option value="1RK">1RK</option>
                     <option value="1BHK">1BHK</option>
@@ -282,7 +369,7 @@ const AddProperty = () => {
                       onChange={(e)=>setTenantsPreferred(e.target.value)}
                       value={tenantsPreferred}
                     >
-                      <option value="Both">Both</option>
+                      <option value="Independent">Both</option>
                       <option value="Bachelors">Bachelors</option>
                       <option value="Family">Family</option>
                     </select>
@@ -390,6 +477,7 @@ const AddProperty = () => {
                       type="radio"
                       name="Visitors entry"
                       id="yesVisitors"
+                      className="scale-125"
                       onChange={() => handleRadioChange("visitorsEntry", "Yes")}
                       checked={amenities.visitorsEntry === "Yes"}
                     />{" "}
@@ -398,6 +486,7 @@ const AddProperty = () => {
                   <label htmlFor="Visitors entry">
                     <input
                       type="radio"
+                      className="scale-125"
                       name="Visitors entry"
                       id="noVisitors"
                       onChange={() => handleRadioChange("visitorsEntry", "No")}
@@ -415,6 +504,7 @@ const AddProperty = () => {
                     <input
                       type="radio"
                       name="Drinking"
+                      className="scale-125"
                       id="yesDrinking"
                       onChange={() => handleRadioChange("drinking", "Yes")}
                       checked={amenities.drinking === "Yes"}
@@ -425,6 +515,7 @@ const AddProperty = () => {
                     <input
                       type="radio"
                       name="Drinking"
+                      className="scale-125"
                       id="noDrinking"
                       onChange={() => handleRadioChange("drinking", "No")}
                       checked={amenities.drinking === "No"}
@@ -440,6 +531,7 @@ const AddProperty = () => {
                   <label htmlFor="smoking">
                     <input
                       type="radio"
+                      className="scale-125"
                       name="smoking"
                       id="yesSmoking"
                       onChange={() => handleRadioChange("smoking", "Yes")}
@@ -450,6 +542,7 @@ const AddProperty = () => {
                   <label htmlFor="smoking">
                     <input
                       type="radio"
+                      className="scale-125"
                       name="smoking"
                       id="noSmoking"
                       onChange={() => handleRadioChange("smoking", "No")}
@@ -466,6 +559,7 @@ const AddProperty = () => {
                   <label htmlFor="Food">
                     <input
                       type="radio"
+                      className="scale-125"
                       name="Food"
                       id="yesFood"
                       onChange={() => handleRadioChange("food", "Yes")}
@@ -476,6 +570,7 @@ const AddProperty = () => {
                   <label htmlFor="Food">
                     <input
                       type="radio"
+                      className="scale-125"
                       name="Food"
                       id="noFood"
                       onChange={() => handleRadioChange("food", "No")}
@@ -493,6 +588,7 @@ const AddProperty = () => {
                     <input
                       type="radio"
                       name="kitchen"
+                      className="scale-125"
                       id="yesKitchen"
                       onChange={() => handleRadioChange("kitchen", "Yes")}
                       checked={amenities.kitchen === "Yes"}
@@ -503,6 +599,7 @@ const AddProperty = () => {
                     <input
                       type="radio"
                       name="kitchen"
+                      className="scale-125"
                       id="noKitchen"
                       onChange={() => handleRadioChange("kitchen", "No")}
                       checked={amenities.kitchen === "No"}
@@ -513,10 +610,12 @@ const AddProperty = () => {
               </div>
             </div>
           </div>
+          <input className="mt-6" onChange={SelectImage} multiple type="file"/>
           <div class="mt-4 flex justify-center">
             <button
               className="text-white w-24 font-semibold cursor-pointer rounded-full flex justify-center py-3 bg-red-800 lg:hover:bg-red-500"
               type="submit"
+              onClick={handleSubmit}
             >
               Submit
             </button>

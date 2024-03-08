@@ -1,76 +1,124 @@
-import React from "react";
+import React, { useState } from "react";
 import { HiOutlineRectangleGroup } from "react-icons/hi2";
 import { IoBedOutline } from "react-icons/io5";
 import { FaCarSide, FaShower,FaRegBuilding } from "react-icons/fa";
 import { MdBalcony } from "react-icons/md";
 import { Link } from "react-router-dom";
 import { IoCall } from "react-icons/io5";
+import { RxCross2 } from "react-icons/rx";
+import { Swiper, SwiperSlide } from "swiper/react";
+import {Autoplay} from "swiper/modules"
+import "swiper/css";
+import 'swiper/css/navigation';
+import { RentPageSlider } from "../Data/data";
 
-const Card = () => {
+
+const Card = ({data}) => {
+  console.log(data);
+  const[moreOpen,setMoreOpen]=useState(false)
+ if(!data){
+  return;
+ }
   return (
-    <div style={{ boxShadow: 'rgba(0, 0, 0, 0.15) 0px 5px 15px 0px' }} className="flex flex-col pb-3  gap-2 lg:flex-row lg:w-[80%] flex-shrink-0 w-[97%]  items-center  mt-2 lg:mt-4 rounded-md lg:p-5 p-2 bg-white justify-between">
+    <div style={{ boxShadow: 'rgba(0, 0, 0, 0.15) 0px 5px 15px 0px' }} className="flex flex-col pb-3  gap-2 lg:flex-row lg:w-[80%] flex-shrink-0 w-[97%] overflow-x-hidden items-center lg:items-start  mt-2 lg:mt-4 rounded-md lg:p-5 p-2 bg-white justify-between">
       <div className="img w-[99%] rounded-lg overflow-hidden lg:w-[25%] h-[30vh]  bg-slate-300">
-        <img
-          src="/Images/flat1.jpg"
-          className="w-full h-full object-cover"
-          alt="N/A"
-        />
+      <Swiper
+          modules={[Autoplay]}
+            slidesPerView={1}
+            autoplay={{ delay: 3000, disableOnInteraction: false }}
+            loop={true}
+            className=" homepageswiper w-full lg:rounded-2xl overflow-hidden lg:h-full "
+          >
+            {data?.imageUrl?.map((path) => (
+              <SwiperSlide  key={path}>
+                <img src={path} alt="N/a" className="w-full h-full object-cover" />
+              </SwiperSlide>
+            ))}
+          </Swiper>
       </div>
-      <div className=" h-auto   w-full lg:w-[70%]">
-        <h1 className="lg:text-3xl text-2xl font-bold">7000 ₹</h1>
+      <div className=" h-auto lg:h-full relative  w-full lg:w-[70%]">
+        {moreOpen&&<button onClick={()=> setMoreOpen(!moreOpen)} className="absolute right-5 z-20 top-3 text-xl "><RxCross2/></button>
+}
+      {moreOpen&&<div className="absolute p-1 pt-10 gap-2 overflow-y-auto  left-0 w-[100%] h-[100%] z-10 bg-white">
+      <h1 className="text-md font-semibold mb-1">Building amenities</h1>
+     <div className="flex flex-wrap gap-2">
+   { data.selectedBuildingItems.map((data, index)=>(
+    <div key={index} className="flex gap-2 text-sm  leading-none h-8 lg:text-md  items-center border border-red-800 p-1 rounded-md">
+      {data}
+          </div>
+   ))
+      }
+     </div>
+     <h1 className="text-md font-semibold my-1">Flat amenities</h1>
+     <div className="flex flex-wrap gap-2">
+     { data.selectedItems.map((data, index)=>(
+    <div key={index} className="flex gap-2 text-sm  leading-none py-1 lg:text-md  items-center border border-red-800 p-1 rounded-md">
+      {data}
+          </div>
+   ))
+      }
+     </div>
+
+       
+           </div>}
+        <h1 className="lg:text-3xl text-2xl font-bold">{data.rent} ₹</h1>
         <p className="lg:font-semibold text-red-800 mt-1">
-          2 BHK Flat <span className="font-normal">for rent in Bandra-mumbai</span>
+        {data.flatType} Flat <span className="font-normal">for rent in {data.city},{data.state}</span>
         </p>
-        <div className="p-2 flex whitespace-nowrap no-scrollbar overflow-x-auto scrollbarnone  gap-2">
-          <div className="flex gap-2 lg:text-md text-sm items-center border border-red-800 p-1 rounded-md">
+        <div className="p-2 relative flex whitespace-nowrap no-scrollbar overflow-y-visible overflow-x-auto scrollbarnone  gap-2">
+          
+         {!(data.furnishing === '0') && (<div className="flex gap-2  lg:text-md text-sm items-center border border-red-800 p-1 rounded-md">
             <IoBedOutline className="lg:text-3xl text-2xl" />
             <div className="text-sm  leading-none">
               <p>Furnishing</p>
-              <h1 className=" font-semibold">Semi Furnished</h1>
+              <h1 className=" font-semibold">{data.furnishing}</h1>
             </div>
-          </div>
-          <div className="flex gap-2 items-center border border-red-800 p-1 rounded-md">
+          </div>)}
+         {!(data.carpetArea === '0') && (<div className="flex gap-2 items-center border border-red-800 p-1 rounded-md">
             <HiOutlineRectangleGroup className="lg:text-3xl text-2xl" />
             <div className=" leading-none">
               <p>Carpet Area</p>
-              <h1 className="font-semibold">300ft</h1>
+              <h1 className="font-semibold">{data.carpetArea}ft</h1>
             </div>
-          </div>
-          <div className="flex gap-2 items-center border border-red-800 p-1 rounded-md">
+          </div>)}
+          {data.parking&&(<div className="flex gap-2 items-center border border-red-800 p-1 rounded-md">
             <FaCarSide className="lg:text-3xl text-xl" />
             <h1 className="font-semibold">Parking</h1>
-          </div>
-          <div className="flex gap-2 items-center border border-red-800 p-1 rounded-md">
+          </div>)}
+          {!(data.bathroom === '0') && (<div className="flex gap-2 items-center border border-red-800 p-1 rounded-md">
             <FaShower className="lg:text-2xl text-xl" />
             <div className=" leading-none">
               <p>Bath rooms</p>
-              <h1 className="font-semibold">1</h1>
+              <h1 className="font-semibold">{data.bathroom}</h1>
             </div>
-          </div>
-          <div className="flex gap-2 items-center border border-red-800 p-1 rounded-md">
+          </div>)}
+          {!(data.balcony === '0') && (<div className="flex gap-2 items-center border border-red-800 p-1 rounded-md">
             <MdBalcony className="lg:text-2xl text-xl" />
-            <h1 className="font-semibold">Balcony</h1>
-          </div>
-          <div className="flex gap-2 items-center border border-red-800 p-1 rounded-md">
+            <div className=" leading-none">
+              <p>Balcony</p>
+              <h1 className="font-semibold">{data.balcony}</h1>
+            </div>
+          </div>)}
+          {!(data.onFloor&&data.totalFloor === '0') && <div className="flex gap-2 items-center border border-red-800 p-1 rounded-md">
             <FaRegBuilding className="lg:text-2xl text-xl" />
-            <div className=" leading-none">
+           {!(data.onFloor === '0') &&  <div className=" leading-none">
               <p>Floor</p>
-              <h1 className="text-center font-semibold">1</h1>
-            </div>
-            <div className=" leading-none">
+              <h1 className="text-center font-semibold">{data.onFloor}</h1>
+            </div>}
+            {!(data.totalFloor === '0') &&<div className=" leading-none">
               <p>Total Floor</p>
-              <h1 className="font-semibold text-center">3</h1>
-            </div>
+              <h1 className="font-semibold text-center">{data.totalFloor}</h1>
+            </div>}
+          </div>}
+          <div onClick={()=>setMoreOpen(!moreOpen)} className=" cursor-pointer shadow-sm rounded-lg text-red-700  h-10 px-1  bg-slate-100 flex items-center">
+            Others
           </div>
         </div>
-       <div className="flex lg:gap-4 justify-between text-sm flex-col lg:flex-row lg:mt-4 lg:w-[95%]">
+       <div className="flex lg:gap-4 gap-3 justify-between text-sm flex-col lg:flex-row lg:mt-4 lg:w-[95%]">
+       
         <div>
-        <div>
-            <p>Civil lines medical chauraha, Civil Lines, Allahabad</p>
-        </div>
-        <div>
-            <p><span className="font-semibold">Locality :</span> Civil lines medical chauraha, Civil Lines, Allahabad</p>
-        </div>
+            <p><span className="font-semibold">Address :</span>{data.address}</p>
+       
         </div>
         <div>
             <Link to={'/contact'}>

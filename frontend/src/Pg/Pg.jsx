@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState,useEffect } from 'react'
 import { Swiper, SwiperSlide } from "swiper/react";
 import {Autoplay,Navigation} from "swiper/modules"
 import "swiper/css";
@@ -9,8 +9,48 @@ import Card from '../Components/card';
 import Footer from '../Components/footer';
 
 const PG = () => {
+  const [data,setData]=useState()
+  const [flatType, setFlatType] = useState('All'); // default to "null"
+  const [tenantsPreferred, setTenantsPreferred] = useState('Independent');
+  const [furnishing, setFurnishing] = useState('All'); // default to "null"
+  const [price,setPrice]=useState(0)
+  const [searched,setSearched]=useState([])
+  const FetchData= async()=>{
+    const resp=await fetch (`${import.meta.env.VITE_BASE_URL}/getall/Pg`, {
+     method: "get",
+     headers: {
+       "Content-Type": "application/json",
+     }
+   })
+    const data= await resp.json();
+    console.log(data);
+    setData(data)
+    return
+   }
+ useEffect(()=>{
+   FetchData()
+ },[])  
+ useEffect(()=>{
+  let filteredFlats = data;
+    filteredFlats = data?.filter((flat) => {
+    // Add your filtering conditions here
+    let isTypeMatch = flatType === 'All' || flat.flatType === flatType;
+    let isTenantsPreferredMatch = tenantsPreferred === 'Independent' || flat.tenantsPreferred === tenantsPreferred;
+    let  isFurnishedMatch = furnishing === 'All' || flat.furnishing === furnishing;
+    return isTypeMatch && isTenantsPreferredMatch && isFurnishedMatch /* && ... */;
+  });
+if(data){if(price==1){
+  filteredFlats?.sort((a, b) => a.rent - b.rent);
+}
+if(price==2){
+  filteredFlats?.sort((a, b) => b.rent - a.rent)
+}}
+setSearched(filteredFlats)
+
+},[data,flatType, tenantsPreferred, furnishing, price])
+
   return (
-    <div  className="w-full relative">
+    <div  className="w-full  relative">
       <h1 className='text-5xl lg:text-[4vw] font-bold absolute z-10 text-red-800 origin-center lg:left-[48%] left-[44%] lg:top-[15vh] top-[10vh] text-center'>PG</h1>
      <Swiper
           modules={[Autoplay,Navigation]}
@@ -20,18 +60,53 @@ const PG = () => {
             loop={true}
             className="w-full  lg:mt-20 mt-16 lg:h-[35vh] h-[25vh]  overflow-hidden"
           >
-            {PGPageSlider?.map((path) => (
-              <SwiperSlide>
+            {PGPageSlider?.map((path, index) => (
+              <SwiperSlide  key={index}>
                 <img src={path} alt="N/a" className="w-full h-full object-cover m-auto" />
               </SwiperSlide>
             ))}
           </Swiper>
-        <div className="flex flex-col items-center bg-slate-50">
-          <Card/>
-          <Card/>
-          <Card/>
-          <Card/>
-          <Card/>
+          <div className='w-full lg:px-[20%] h-16 flex justify-center gap-2'>
+          <div className="flex items-center gap-3">
+                    <label className="text-black" htmlFor="country">
+                      Furnishing
+                    </label>
+                    <select
+                      onChange={(e)=>setFurnishing(e.target.value)} // Attach the change event handler
+                      value={furnishing}
+                      className="w-full  rounded-md border focus:outline-none border-gray-700 text-black px-2 py-1"
+                      id="country"
+                    >
+                      <option value="All">All</option>
+                      <option value="Unfurnished">Unfurnished</option>
+                      <option value="Semi furnished">Semi furnished</option>
+                      <option value="Full furnished">Full furnished</option>
+                    </select>
+                  </div>
+               
+                <div className="flex flex-row space-x-2">
+                  <div className="flex items-center gap-3 flex-nowrap">
+                    <label className="text-black text-nowrap" htmlFor="country">
+                    Price
+                    </label>
+                    <select
+                      className="w-full  border focus:outline-none rounded-md border-gray-700 text-black px-2 py-1"
+                      id="country"
+                      onChange={(e)=>setPrice(e.target.value)}
+                      value={price}
+                    >
+                      <option value="0"></option>
+                      <option value="1">Lowest</option>
+                      <option value="2">Highest</option>
+                    </select>
+                  </div>
+                </div>
+          </div>
+        <div className="flex min-h-[30vh] flex-col items-center bg-slate-50">
+        {searched?.map((data,index)=>(
+           <Card data={data} key={index} />
+         ))
+         }
          
         </div>
         <Footer/>
