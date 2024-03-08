@@ -26,6 +26,7 @@ const Card = ({data}) => {
           modules={[Autoplay,Navigation]}
             slidesPerView={1}
             loop={true}
+            navigation
             className=" homepageswiper w-full lg:rounded-2xl overflow-hidden lg:h-full "
           >
             {data?.imageUrl?.map((path) => (
