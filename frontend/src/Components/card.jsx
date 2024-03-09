@@ -10,11 +10,10 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import {Autoplay,Navigation} from "swiper/modules"
 import "swiper/css";
 import 'swiper/css/navigation';
-import { RentPageSlider } from "../Data/data";
 
 
 const Card = ({data}) => {
-  console.log(data);
+  
   const[moreOpen,setMoreOpen]=useState(false)
  if(!data){
   return;
@@ -31,7 +30,7 @@ const Card = ({data}) => {
           >
             {data?.imageUrl?.map((path) => (
               <SwiperSlide  key={path}>
-                <img src={path} alt="N/a" className="w-full h-full object-cover" />
+                <img src={path ||'/default.jpeg'} alt="N/a" className="w-full h-full object-cover" />
               </SwiperSlide>
             ))}
           </Swiper>
@@ -58,13 +57,37 @@ const Card = ({data}) => {
    ))
       }
      </div>
+     <h1 className="text-md font-semibold my-1">Others</h1>
+     <div className="flex flex-wrap gap-2">
+      {data?.amenities?.visitorsEntry&& <div className="flex gap-2 text-sm  leading-none py-1 lg:text-md  items-center border border-red-800 p-1 rounded-md">
+      Visitors entry : {data.amenities.visitorsEntry}
+          </div>}
+      {data?.amenities?.smoking&& <div className="flex gap-2 text-sm  leading-none py-1 lg:text-md  items-center border border-red-800 p-1 rounded-md">
+      Smoking : {data.amenities.smoking}
+          </div>}
+      {data?.amenities?.drinking&& <div className="flex gap-2 text-sm  leading-none py-1 lg:text-md  items-center border border-red-800 p-1 rounded-md">
+      Drinking : {data.amenities.drinking}
+          </div>}
+      {data?.amenities?.food&& <div className="flex gap-2 text-sm  leading-none py-1 lg:text-md  items-center border border-red-800 p-1 rounded-md">
+      Food : {data.amenities.food}
+          </div>}
+     </div>
 
        
            </div>}
-        <h1 className="lg:text-3xl text-2xl font-bold">{data.rent} ₹</h1>
+     <div className="flex justify-between">
+     <div>
+      <h1 className="lg:text-3xl text-2xl font-bold">{data.rent} ₹<span className="text-lg">/month</span></h1>
+      {data.securityDeposit&&<p className="text-sm">Security deposit: <span className="font-semibold">{data.securityDeposit}</span></p>}
         <p className="lg:font-semibold text-red-800 mt-1">
         {data.flatType} Flat <span className="font-normal">for rent in {data.city},{data.state}</span>
         </p>
+        <p className="lg:font-semibold text-red-800 -mt-1">{data.tenantsPreferred}</p>
+       </div>
+       <div onClick={()=>setMoreOpen(!moreOpen)} className=" cursor-pointer shadow-sm rounded-lg text-red-700  h-10 px-1  bg-slate-100 flex items-center">
+            Others
+          </div>
+     </div>
         <div className="p-2 relative flex whitespace-nowrap no-scrollbar overflow-y-visible overflow-x-auto scrollbarnone  gap-2">
           
          {!(data.furnishing === '0') && (<div className="flex gap-2  lg:text-md text-sm items-center border border-red-800 p-1 rounded-md">
@@ -110,9 +133,7 @@ const Card = ({data}) => {
               <h1 className="font-semibold text-center">{data.totalFloor}</h1>
             </div>}
           </div>}
-          <div onClick={()=>setMoreOpen(!moreOpen)} className=" cursor-pointer shadow-sm rounded-lg text-red-700  h-10 px-1  bg-slate-100 flex items-center">
-            Others
-          </div>
+          
         </div>
        <div className="flex lg:gap-4 gap-3 justify-between text-sm flex-col lg:flex-row lg:mt-4 lg:w-[95%]">
        

@@ -7,6 +7,7 @@ import 'swiper/swiper-bundle.css';
 import { PGPageSlider } from '../Data/data';
 import Card from '../Components/card';
 import Footer from '../Components/footer';
+import CardPg from '../Components/cardPg';
 
 const PG = () => {
   const [data,setData]=useState()
@@ -40,17 +41,17 @@ const PG = () => {
     return isTypeMatch && isTenantsPreferredMatch && isFurnishedMatch /* && ... */;
   });
 if(data){if(price==1){
-  filteredFlats?.sort((a, b) => a.rent - b.rent);
+  filteredFlats?.sort((a, b) => a.singleSharingRent - b.singleSharingRent);
 }
 if(price==2){
-  filteredFlats?.sort((a, b) => b.rent - a.rent)
+  filteredFlats?.sort((a, b) => b.singleSharingRent - a.singleSharingRent)
 }}
 setSearched(filteredFlats)
 
 },[data,flatType, tenantsPreferred, furnishing, price])
 
   return (
-    <div  className="w-full  relative">
+    <div  className="w-full overflow-x-hidden  relative">
       <h1 className='text-5xl lg:text-[4vw] font-bold absolute z-10 text-red-800 origin-center lg:left-[48%] left-[44%] lg:top-[15vh] top-[10vh] text-center'>PG</h1>
      <Swiper
           modules={[Autoplay,Navigation]}
@@ -62,11 +63,26 @@ setSearched(filteredFlats)
           >
             {PGPageSlider?.map((path, index) => (
               <SwiperSlide  key={index}>
-                <img src={path} alt="N/a" className="w-full h-full object-cover m-auto" />
+                <img src={path} alt="N/a" className="w-full object-cover m-auto" />
               </SwiperSlide>
             ))}
           </Swiper>
-          <div className='w-full lg:px-[20%] h-16 flex justify-center gap-2'>
+          <div className='w-full lg:px-[20%] px-10 pl-24   overflow-x-auto h-16 flex justify-center gap-2'>
+          <div className="flex items-center gap-3">
+                    <label className="text-black" htmlFor="country">
+                      Gender
+                    </label>
+                    <select
+                      onChange={(e)=>setTenantsPreferred(e.target.value)} // Attach the change event handler
+                      value={tenantsPreferred}
+                      className="w-full  rounded-md border focus:outline-none border-gray-700 text-black px-2 py-1"
+                      id="country"
+                    >
+                      <option value="Independent">All</option>
+                      <option value="Boy">Boy</option>
+                      <option value="Girl">Girl</option>
+                    </select>
+                  </div>
           <div className="flex items-center gap-3">
                     <label className="text-black" htmlFor="country">
                       Furnishing
@@ -104,7 +120,7 @@ setSearched(filteredFlats)
           </div>
         <div className="flex min-h-[30vh] flex-col items-center bg-slate-50">
         {searched?.map((data,index)=>(
-           <Card data={data} key={index} />
+           <CardPg data={data} key={index} />
          ))
          }
          

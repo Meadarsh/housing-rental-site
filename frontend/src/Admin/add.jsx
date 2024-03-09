@@ -5,6 +5,8 @@ const AddProperty = () => {
   const [rent, setRent] = useState('');
   const [singleSharingRent, setSingleSharingRent] = useState('');
   const [twinSharingRent, setTwinSharingRent] = useState('');
+  const [threeSharingRent, setThreeSharingRent] = useState('');
+  const [fourSharingRent, setFourSharingRent] = useState('');
   const [securityDeposit, setSecurityDeposit] = useState('');
   const [address, setAddress] = useState('');
   const [city, setCity] = useState('');
@@ -33,6 +35,8 @@ const AddProperty = () => {
     rent,
     singleSharingRent,
     twinSharingRent,
+    threeSharingRent,
+    fourSharingRent,
     securityDeposit,
     address,
     city,
@@ -154,7 +158,7 @@ const Upload= async(imgUrl)=>{
                     </select> for rent</h2>
           <div className="lg:flex lg:gap-5">
             <div>
-              <div class="mt-4">
+            {rentalType=='Flat'?<div class="mt-4">
                 <label class="text-black" for="name">
                   Rent
                 </label>
@@ -165,7 +169,8 @@ const Upload= async(imgUrl)=>{
                   onChange={(e)=>setRent(e.target.value)}
                   value={rent}
                 />
-              </div>
+              </div>:
+              <>
               <div class="mt-4 flex gap-2">
                <div >
                <label class="text-black" for="name">
@@ -192,6 +197,32 @@ const Upload= async(imgUrl)=>{
                 />
                </div>
               </div>
+              <div class="mt-4 flex gap-2">
+               <div >
+               <label class="text-black" for="name">
+                  Three sharing rent
+                </label>
+                <input
+                  placeholder="Rent per month"
+                  class="w-full bg-gray-200 rounded-md border-gray-700 text-black px-2 py-1"
+                  type="number"
+                  onChange={(e)=>setThreeSharingRent(e.target.value)}
+                  value={threeSharingRent}
+                />
+               </div>
+               <div>
+               <label class="text-black" for="name">
+                  Four sharing rent
+                </label>
+                <input
+                  placeholder="Rent per month"
+                  class="w-full bg-gray-200 rounded-md border-gray-700 text-black px-2 py-1"
+                  type="number"
+                  onChange={(e)=>setFourSharingRent(e.target.value)}
+                  value={fourSharingRent}
+                />
+               </div>
+              </div></>}
               <div class="mt-4">
                 <label class="text-black" for="name">
                   Security/Deposit
@@ -250,7 +281,7 @@ const Upload= async(imgUrl)=>{
               </div>
 
               <div class="mt-4 flex flex-row space-x-2">
-                <div class="flex-1">
+               {rentalType=='Flat'?<div class="flex-1">
                   <label class="text-black" for="zip">
                     Carpet Area
                   </label>
@@ -262,10 +293,10 @@ const Upload= async(imgUrl)=>{
                     onChange={(e)=>setCarpetArea(e.target.value)}
                     value={carpetArea}
                   />
-                </div>
+                </div>:null}
 
                 <div class="flex flex-row space-x-2">
-                  <div class="flex-1">
+                {rentalType=='Flat'?<div class="flex-1">
                     <label class="text-black" for="country">
                       Furnishing
                     </label>
@@ -280,12 +311,12 @@ const Upload= async(imgUrl)=>{
                       <option value="Semi furnished">Semi furnished</option>
                       <option value="Full furnished">Full furnished</option>
                     </select>
-                  </div>
+                  </div>:null}
                 </div>
                 <div class="flex flex-row space-x-2"></div>
               </div>
               <div class="mt-4 flex flex-row space-x-2">
-                <div class="flex-1 min-w-20">
+              {rentalType=='Flat'? <div class="flex-1 min-w-20">
                   <label class="text-black" for="country">
                     Flat type
                   </label>
@@ -296,14 +327,13 @@ const Upload= async(imgUrl)=>{
                     value={flatType}
                   >
                     <option value="">null</option>
-                    <option value="1R">1R</option>
                     <option value="1RK">1RK</option>
                     <option value="1BHK">1BHK</option>
                     <option value="2BHK">2BHK</option>
                     <option value="3BHK">3BHK</option>
                   </select>
-                </div>
-                <div class="flex flex-row space-x-2">
+                </div>:null}
+                {rentalType=='Flat'?<div class="flex flex-row space-x-2">
                   <div class="flex-1">
                     <label class="text-black" for="country">
                       Bathroom
@@ -320,9 +350,9 @@ const Upload= async(imgUrl)=>{
                       <option value="3">3</option>
                     </select>
                   </div>
-                </div>
+                </div>:null}
 
-                <div class="flex flex-row space-x-2">
+                {rentalType=='Flat'? <div class="flex flex-row space-x-2">
                   <div class="flex-1">
                     <label class="text-black" for="country">
                       Parking
@@ -338,10 +368,10 @@ const Upload= async(imgUrl)=>{
                       <option value="1">Available</option>
                     </select>
                   </div>
-                </div>
+                </div>:null}
               </div>
               <div class="mt-4 flex flex-row space-x-2">
-                <div class="flex-1 min-w-20">
+              {rentalType=='Flat'? <div class="flex-1 min-w-20">
                   <label class="text-black" for="country">
                     Balcony
                   </label>
@@ -356,9 +386,25 @@ const Upload= async(imgUrl)=>{
                     <option value="2">2</option>
                     <option value="3">3</option>
                   </select>
-                </div>
+                </div>:<div class="flex-1 min-w-20">
+                  <label class="text-black" for="country">
+                    Sharing
+                  </label>
+                  <select
+                    class="w-full bg-gray-200 rounded-md border-gray-700 text-black px-2 py-1"
+                    id="country"
+                    onChange={(e) => setBalcony(e.target.value)}
+                    value={balcony}
+                  >
+                    <option value="0">null</option>
+                    <option value="Single sharing">Single sharing</option>
+                    <option value="Twin sharing">Twin sharing</option>
+                    <option value="Three sharing">Three sharing</option>
+                    <option value="Four sharing">Four sharing</option>
+                  </select>
+                </div>}
 
-                <div class="flex flex-row space-x-2">
+                {rentalType=='Flat'? <div class="flex flex-row space-x-2">
                   <div class="flex-1">
                     <label class="text-black" for="country">
                     Tenants Preferred
@@ -374,8 +420,25 @@ const Upload= async(imgUrl)=>{
                       <option value="Family">Family</option>
                     </select>
                   </div>
-                </div>
+                </div>:
                 <div class="flex flex-row space-x-2">
+                  <div class="flex-1">
+                    <label class="text-black" for="country">
+                    Gender
+                    </label>
+                    <select
+                      class="w-full bg-gray-200 rounded-md border-gray-700 text-black px-2 py-1"
+                      id="country"
+                      onChange={(e)=>setTenantsPreferred(e.target.value)}
+                      value={tenantsPreferred}
+                    >
+                      <option value="Independent">Both</option>
+                      <option value="Boy">Boy</option>
+                      <option value="Girl">Girl</option>
+                    </select>
+                  </div>
+                </div>}
+                {rentalType=='Flat'? <div class="flex flex-row space-x-2">
                   <div class="flex-1">
                     <label class="text-black" for="zip">
                       Total floor
@@ -402,11 +465,11 @@ const Upload= async(imgUrl)=>{
                       value={onFloor}
                     />
                   </div>
-                </div>
+                </div>:null}
               </div>
              
             </div>
-            <div className="lg:border-l-2 lg:pl-3 lg:w-[20vw] flex flex-col justify-between">
+            {rentalType=='Flat'?<> <div className="lg:border-l-2 lg:pl-3 lg:w-[20vw] flex flex-col justify-between">
               <h1 className="text-xl font-semibold">Building Amenities:</h1>
               {[
                 "Visitor parking",
@@ -467,7 +530,7 @@ const Upload= async(imgUrl)=>{
                   &nbsp; {item}
                 </span>
               ))}
-            </div>
+            </div></>:null}
             <div className="lg:w-[10vw] gap-3 flex flex-col">
               <div>
                 <p className="text-lg">Visitors entry</p>
@@ -581,7 +644,7 @@ const Upload= async(imgUrl)=>{
                 </div>
               </div>
 
-              <div>
+             {rentalType=='Pg'? <div>
                 <p>Kitchen facility</p>
                 <div className="flex gap-4">
                   <label htmlFor="kitchen">
@@ -607,7 +670,7 @@ const Upload= async(imgUrl)=>{
                     &nbsp;No
                   </label>
                 </div>
-              </div>
+              </div>:null}
             </div>
           </div>
           <input className="mt-6" onChange={SelectImage} multiple type="file"/>

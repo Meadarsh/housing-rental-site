@@ -50,7 +50,7 @@ setSearched(filteredFlats)
 },[data,flatType, tenantsPreferred, furnishing, price])
 
   return (
-    <div  className="w-full relative">
+    <div  className="w-full overflow-x-hidden relative">
       <h1 className='text-5xl lg:text-[4vw] font-bold absolute z-10 text-red-800 origin-center lg:left-[46%] left-[36%] lg:top-[15vh] top-[10vh] text-center'>Rent</h1>
      <Swiper
           modules={[Autoplay,Navigation]}
@@ -66,7 +66,7 @@ setSearched(filteredFlats)
               </SwiperSlide>
             ))}
           </Swiper>
-          <div className='w-full  h-16 flex justify-center gap-8'>
+          <div className='w-full px-10 pl-24 lg:px-0  overflow-x-auto h-16 flex justify-center gap-4 lg:gap-8'>
           <div className="flex items-center gap-3">
                     <label className="text-black" htmlFor="country">
                       Furnishing
@@ -94,7 +94,6 @@ setSearched(filteredFlats)
                     value={flatType}
                   >
                     <option value="All">All</option>
-                    <option value="1R">1R</option>
                     <option value="1RK">1RK</option>
                     <option value="1BHK">1BHK</option>
                     <option value="2BHK">2BHK</option>

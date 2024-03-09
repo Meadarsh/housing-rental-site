@@ -44,8 +44,8 @@ const Hilights = () => {
   return (
     <div className=' w-full flex flex-col items-center lg:p-10 '>
       <h1 className='text-3xl font-bold mt-9 lg:text-[3vw] text-red-800'>Recent Properties</h1>
-      <div className='w-full mt-8'>
-        <h1 className='text-4xl lg:text-5xl  mb-2'>Flats</h1>
+      <div className='w-full mt-[15vh]'>
+        <h1 className='text-4xl lg:text-5xl font-semibold  mb-2'>Rent</h1>
         <div className='relative h-[50vh] w-full flex items-center'>
         <Swiper
         slidesPerView={1}
@@ -69,7 +69,7 @@ const Hilights = () => {
           },
         }}
       >
-        {data?.map((data)=>(<SwiperSlide><Hilightscard data={data}/></SwiperSlide>))}
+        {data?.map((data)=>(<SwiperSlide><Link to='/rent'><Hilightscard data={data}/></Link></SwiperSlide>))}
        
         
       </Swiper>
@@ -85,7 +85,7 @@ const Hilights = () => {
         </div>
       </div>
       <div className='w-full mt-6 lg:mt-20'>
-        <h1 className='text-4xl lg:text-5xl  mb-2'>PG</h1>
+        <h1 className='text-4xl lg:text-5xl font-semibold  mb-2'>PG</h1>
         <div className='relative h-[50vh] w-full flex items-center'>
         <Swiper
         slidesPerView={1}
@@ -109,7 +109,7 @@ const Hilights = () => {
         loop={true}
         modules={[Autoplay,Pagination]}
       >
-               {dataPg?.map((data)=>(<SwiperSlide><HilightscardPg data={data}/></SwiperSlide>))}
+               {dataPg?.map((data)=>(<SwiperSlide><Link to='/pg'><HilightscardPg data={data}/></Link></SwiperSlide>))}
 
         
       </Swiper>

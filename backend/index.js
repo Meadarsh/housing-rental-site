@@ -6,13 +6,13 @@ import mongoose from "mongoose";
 import {v2  as cloudinary} from 'cloudinary'
 import { Flats } from "./schema/schema.js";
 dotenv.config({
-  path:'./env'
+  path:'./.env'
 })
 
 cloudinary.config({
   cloud_name: 'cloud-space',
-  api_key: '469514856978432',
-  api_secret: 'YVzVuce1Kje6-CadfGkOKdXEV0s',
+  api_key: process.env.CLOUDINARY_API,
+  api_secret:process.env.CLOUDINARY_SECRET_KEY ,
 });
 
 
@@ -20,13 +20,13 @@ const app = express();
 app.use(express.json());
 const PORT = process.env.PORT||3001;
 app.use(cors({
-    origin:'https://pgwala.vercel.app'
+    origin:process.env.ORIGIN
 }))
  // Connect to the database
 
 const connectDB=async()=>{
   try {
-   const connectionInst=await mongoose.connect(`mongodb+srv://itsadarsh33:ksk5veiIALU6a5fU@cloud.vlfkpqe.mongodb.net/?retryWrites=true&w=majority&appName=cloud`)
+   const connectionInst=await mongoose.connect(process.env.MONGO_URI)
    console.log("MongoDB connected:",connectionInst.connection.host);
   } catch (error) {
       console.log('Unable to connect',error)
