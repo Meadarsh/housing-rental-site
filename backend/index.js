@@ -64,10 +64,8 @@ app.post("/upload", async (req, res) => {
   try {
     const request = req.body.allStateValues;
     await Flats.create(request);
-    console.log(request);
     res.status(200).json({ message: "Uploaded Successfully" });
   } catch (error) {
-    console.error("Error uploading images:", error);
     res.status(500).json({ error: "Internal Server Error" });
   }
 });
@@ -75,7 +73,6 @@ app.post("/upload", async (req, res) => {
 app.get("/getall", async (req, res) => {
   try {
     let type = req.params.type;
-    console.log(type);
     const data = await Flats.find();
     res.send(data);
   } catch (error) {
@@ -85,7 +82,6 @@ app.get("/getall", async (req, res) => {
 app.get("/getall/:type", async (req, res) => {
   try {
     let type = req.params.type;
-    console.log(type);
     const data = await Flats.find({
       rentalType: type,
     });
@@ -99,15 +95,13 @@ app.get("/getall/:type", async (req, res) => {
 app.get("/getrecent/:type", async (req, res) => {
   try {
     let type = req.params.type;
-    console.log(type);
     const data = await Flats.find({
       rentalType: type,
     })
       //last 10
       .sort({ createdAt: -1 })
       .limit(10);
-    console.log(data);
-    console.log(data);
+   
     res.send(data);
   } catch (error) {
     res.status(400).send(`Error getting data ${error}`);
@@ -117,8 +111,6 @@ app.get("/getrecent/:type", async (req, res) => {
 // Handling image deletion by public IDs
 app.post("/delete", async (req, res) => {
   const { publicIds, id } = req.body;
-  console.log(req.body);
-
   try {
     // Delete images using Cloudinary API
     if (publicIds) {
@@ -139,19 +131,17 @@ app.post("/delete", async (req, res) => {
 
     // Delete the document in the database
     const deleted = await Flats.deleteOne({ _id: id });
-    console.log(deleted);
     if (deleted) {
       res.status(200).json({ success: true, message: "Deleted Successfully" });
     } else {
       res.status(404).json({ success: false, message: "Resource not found" });
     }
   } catch (error) {
-    console.error("Error deleting images:", error);
     res.status(500).json({ success: false, error: "Internal Server Error" });
   }
 });
 
 
 app.listen(PORT, () => {
-  console.log(`Server is running on http://localhost:${PORT}`);
+  console.log(`Server of housing is running on http://localhost:${PORT}`);
 });
