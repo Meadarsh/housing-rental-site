@@ -55,7 +55,37 @@ const AddProperty = () => {
     amenities,
     imageUrl:[]
   };
-
+  const initializeState = () => {
+    setRentalType("");
+    setRent("");
+    setSingleSharingRent("");
+    setTwinSharingRent("");
+    setThreeSharingRent("");
+    setFourSharingRent("");
+    setSecurityDeposit("");
+    setAddress("");
+    setCity("");
+    setState("");
+    setCarpetArea("");
+    setFurnishing('0');
+    setFlatType('0');
+    setBathroom('0');
+    setParking('0');
+    setBalcony('0');
+    setTotalFloor("");
+    setOnFloor("");
+    setTenantsPreferred("Independent");
+    setSelectedItems([]);
+    setSelectedBuildingItems([]);
+    setSelectedImages([]);
+    setAmenities({
+      visitorsEntry: "",
+      drinking: "",
+      smoking: "",
+      food: "",
+      kitchen: "",
+    });
+  };
   const handleRadioChange = (category, value) => {
     setAmenities((prevAmenities) => ({
       ...prevAmenities,
@@ -138,6 +168,7 @@ const Upload= async(imgUrl)=>{
   if (result.ok) {
     setCalling(true)
     alert("upload");
+    initializeState()
   }
 }
  
@@ -690,3 +721,5 @@ const Upload= async(imgUrl)=>{
 };
 
 export default AddProperty;
+
+

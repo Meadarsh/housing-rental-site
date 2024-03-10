@@ -24,10 +24,15 @@ const Cardfordelete = ({ Refreshfunc, data}) => {
     body: JSON.stringify({publicIds,id:data._id}),
   });
   
-  if (result.ok) {
+ 
+  const res=await result.json();
+   if (res) {
+    alert(res.message)
     Refreshfunc()
-   alert('Deleted Successfully')
-  }
+    
+    return
+   }
+  
   }
   return (
     <div style={{ boxShadow: 'rgba(0, 0, 0, 0.15) 0px 5px 15px 0px' }} className="flex flex-col pb-3  gap-2 lg:flex-row lg:w-[80%] flex-shrink-0 w-[97%] lg:h-[30vh] items-center  mt-2 lg:mt-4 rounded-md  lg:p-5 p-2 bg-white justify-between">

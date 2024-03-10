@@ -30,7 +30,7 @@ const Card = ({data}) => {
           >
             {data?.imageUrl?.map((path) => (
               <SwiperSlide  key={path}>
-                <img src={path ||'/default.jpeg'} alt="N/a" className="w-full h-full object-cover" />
+                <img src={path ||'/default.jpeg'} alt="N/a" className="w-full h-full  object-cover" />
               </SwiperSlide>
             ))}
           </Swiper>

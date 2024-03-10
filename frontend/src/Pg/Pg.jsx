@@ -52,7 +52,7 @@ setSearched(filteredFlats)
 
   return (
     <div  className="w-full overflow-x-hidden  relative">
-      <h1 className='text-5xl lg:text-[4vw] font-bold absolute z-10 text-red-800 origin-center lg:left-[48%] left-[44%] lg:top-[15vh] top-[10vh] text-center'>PG</h1>
+      <h1 className='text-5xl lg:text-[4vw] font-bold absolute z-10 text-red-800 origin-center lg:left-[48%] left-[44%] lg:top-[20vh] top-[10vh] text-center'>PG</h1>
      <Swiper
           modules={[Autoplay,Navigation]}
             navigation
