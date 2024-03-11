@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 const AddProperty = () => {
   const[calling,setCalling]=useState(true)
-  const [rentalType, setRentalType] = useState("");
+  const [rentalType, setRentalType] = useState("Flat");
   const [rent, setRent] = useState('');
   const [singleSharingRent, setSingleSharingRent] = useState('');
   const [twinSharingRent, setTwinSharingRent] = useState('');
@@ -183,7 +183,6 @@ const Upload= async(imgUrl)=>{
                       class="bg-gray-200 rounded-md border border-red-500  text-black px-2 py-1"
                       id="country"
                     >
-                      <option value="">null</option>
                       <option value="Flat">Flat</option>
                       <option value="Pg">Pg</option>
                     </select> for rent</h2>

@@ -78,7 +78,7 @@ const CardPg = ({data}) => {
       <h1>{data.fourSharingRent}/month</h1>
      </div>}
 </div>
-{data.securityDeposit&&<p className="text-sm">Security deposit: <span className="font-semibold">{data.securityDeposit}</span></p>}
+{data.securityDeposit&&<p className="text-lg">Security deposit: <span className="font-semibold">{data.securityDeposit}</span> ₹</p>}
 
         <p className="lg:font-semibold text-red-800 mt-1">
         {data.rentalType} <span className="font-normal">available in {data.city},{data.state}</span>

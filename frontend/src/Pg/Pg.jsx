@@ -37,7 +37,7 @@ const PG = () => {
     // Add your filtering conditions here
     let isTypeMatch = flatType === 'All' || flat.flatType === flatType;
     let isTenantsPreferredMatch = tenantsPreferred === 'Independent' || flat.tenantsPreferred === tenantsPreferred;
-    let  isFurnishedMatch = furnishing === 'All' || flat.furnishing === furnishing;
+    let  isFurnishedMatch = furnishing === 'All' || flat.balcony === furnishing;
     return isTypeMatch && isTenantsPreferredMatch && isFurnishedMatch /* && ... */;
   });
 if(data){if(price==1){
@@ -48,7 +48,7 @@ if(price==2){
 }}
 setSearched(filteredFlats)
 
-},[data,flatType, tenantsPreferred, furnishing, price])
+},[data, tenantsPreferred, furnishing, price])
 
   return (
     <div  className="w-full overflow-x-hidden  relative">
@@ -83,9 +83,9 @@ setSearched(filteredFlats)
                       <option value="Girl">Girl</option>
                     </select>
                   </div>
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-2">
                     <label className="text-black" htmlFor="country">
-                      Furnishing
+                      Sharing
                     </label>
                     <select
                       onChange={(e)=>setFurnishing(e.target.value)} // Attach the change event handler
@@ -94,9 +94,10 @@ setSearched(filteredFlats)
                       id="country"
                     >
                       <option value="All">All</option>
-                      <option value="Unfurnished">Unfurnished</option>
-                      <option value="Semi furnished">Semi furnished</option>
-                      <option value="Full furnished">Full furnished</option>
+                      <option value="Single sharing">Single sharing</option>
+                      <option value="Twin sharing">Twin sharing</option>
+                      <option value="Three sharing">Three sharing</option>
+                      <option value="Four sharing">Four sharing</option>
                     </select>
                   </div>
                

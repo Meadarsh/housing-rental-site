@@ -11,7 +11,7 @@ import Footer from '../Components/footer';
 const Rent = () => {
   const [data,setData]=useState()
   const [flatType, setFlatType] = useState('All'); // default to "null"
-  const [tenantsPreferred, setTenantsPreferred] = useState('Independent');
+  const [tenantsPreferred, setTenantsPreferred] = useState('All');
   const [furnishing, setFurnishing] = useState('All'); // default to "null"
   const [price,setPrice]=useState(0)
   const [searched,setSearched]=useState([])
@@ -35,7 +35,7 @@ useEffect(()=>{
     filteredFlats = data?.filter((flat) => {
     // Add your filtering conditions here
     let isTypeMatch = flatType === 'All' || flat.flatType === flatType;
-    let isTenantsPreferredMatch = tenantsPreferred === 'Independent' || flat.tenantsPreferred === tenantsPreferred;
+    let isTenantsPreferredMatch = tenantsPreferred === 'All' || flat.tenantsPreferred === tenantsPreferred;
     let  isFurnishedMatch = furnishing === 'All' || flat.furnishing === furnishing;
     return isTypeMatch && isTenantsPreferredMatch && isFurnishedMatch /* && ... */;
   });
@@ -111,6 +111,7 @@ setSearched(filteredFlats)
                       onChange={(e)=>setTenantsPreferred(e.target.value)}
                       value={tenantsPreferred}
                     >
+                      <option value="All">All</option>
                       <option value="Independent">Independent</option>
                       <option value="Bachelors">Bachelors</option>
                       <option value="Family">Family</option>

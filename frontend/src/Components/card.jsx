@@ -78,7 +78,7 @@ const Card = ({data}) => {
      <div className="flex justify-between">
      <div>
       <h1 className="lg:text-3xl text-2xl font-bold">{data.rent} ₹<span className="text-lg">/month</span></h1>
-      {data.securityDeposit&&<p className="text-sm">Security deposit: <span className="font-semibold">{data.securityDeposit}</span></p>}
+      {data.securityDeposit&&<p className="text-lg">Security deposit: <span className="font-semibold">{data.securityDeposit}</span> ₹</p>}
         <p className="lg:font-semibold text-red-800 mt-1">
         {data.flatType} Flat <span className="font-normal">for rent in {data.city},{data.state}</span>
         </p>
