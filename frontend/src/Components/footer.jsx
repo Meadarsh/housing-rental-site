@@ -5,7 +5,7 @@ import { RiTwitterXLine } from "react-icons/ri";
 
 const Footer = () => {
   return (
-   <div>
+   <div className='w-full'>
      <div className=' h-[30vh] lg:h-[25vh] text-white flex w-full lg:flex-row flex-col gap-4 lg:gap-0 items-center bg-red-950 mt-8'>
         <div className='logo lg:w-1/3  lg:h-[80%] flex items-center pl-3'>
           <h1 className=' text-3xl lg:text-[3vw]'>THEFLAT4U.com</h1>
