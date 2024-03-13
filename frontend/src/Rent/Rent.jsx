@@ -78,9 +78,9 @@ setSearched(filteredFlats)
                       id="country"
                     >
                       <option value="All">All</option>
-                      <option value="Unfurnished">Unfurnished</option>
-                      <option value="Semi furnished">Semi furnished</option>
                       <option value="Full furnished">Full furnished</option>
+                      <option value="Semi furnished">Semi furnished</option>
+                      <option value="Unfurnished">Unfurnished</option>
                     </select>
                   </div>
                   <div className="flex items-center gap-3">
@@ -94,6 +94,7 @@ setSearched(filteredFlats)
                     value={flatType}
                   >
                     <option value="All">All</option>
+                    <option value="Studio apt">Studio apt</option>
                     <option value="1RK">1RK</option>
                     <option value="1BHK">1BHK</option>
                     <option value="2BHK">2BHK</option>
@@ -112,9 +113,11 @@ setSearched(filteredFlats)
                       value={tenantsPreferred}
                     >
                       <option value="All">All</option>
-                      <option value="Independent">Independent</option>
-                      <option value="Bachelors">Bachelors</option>
                       <option value="Family">Family</option>
+                      <option value="Bachelors">Bachelors</option>
+                      <option value="Independent">Company</option>
+                      
+                      
                     </select>
                   </div>
                 </div>

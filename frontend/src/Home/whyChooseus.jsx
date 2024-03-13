@@ -32,7 +32,19 @@ const WhyChooseus = () => {
             is unforgettable.
           </p>
         </div>
+ 
+
       </div>
+      <div>
+      <div className="flex justify-center items-center mt-[10vh] h-[10vh]">
+        <h1 className="lg:text-[3vw] font-bold text-4xl text-center text-red-800">
+          About Us
+        </h1>
+      </div>
+      <p className="lg:text-xl text-lg text-center px-4"><span className="font-bold">Flat4U:</span> Your Easy Apartment Solution
+Simplify your apartment search with Flat4U. Browse listings effortlessly and find your perfect home in no time.</p>
+
+  </div>
     </>
   );
 };

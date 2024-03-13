@@ -9,6 +9,7 @@ const AddProperty = () => {
   const [fourSharingRent, setFourSharingRent] = useState('');
   const [securityDeposit, setSecurityDeposit] = useState('');
   const [address, setAddress] = useState('');
+  const [buildingName, setBuildingName] = useState('')
   const [city, setCity] = useState('');
   const [state, setState] = useState('');
   const [carpetArea, setCarpetArea] = useState('');
@@ -19,7 +20,7 @@ const AddProperty = () => {
   const [balcony, setBalcony] = useState('0'); // default to "null"
   const [totalFloor, setTotalFloor] = useState('');
   const [onFloor, setOnFloor] = useState('');
-  const [tenantsPreferred, setTenantsPreferred] = useState('Independent');
+  const [tenantsPreferred, setTenantsPreferred] = useState('');
   const [selectedItems, setSelectedItems] = useState([]);
   const [selectedBuildingItems, setSelectedBuildingItems] = useState([]);
   const [selectedImages,setSelectedImages]=useState([])
@@ -39,6 +40,7 @@ const AddProperty = () => {
     fourSharingRent,
     securityDeposit,
     address,
+    buildingName,
     city,
     state,
     carpetArea,
@@ -56,7 +58,7 @@ const AddProperty = () => {
     imageUrl:[]
   };
   const initializeState = () => {
-    setRentalType("");
+    
     setRent("");
     setSingleSharingRent("");
     setTwinSharingRent("");
@@ -64,6 +66,7 @@ const AddProperty = () => {
     setFourSharingRent("");
     setSecurityDeposit("");
     setAddress("");
+    setBuildingName('')
     setCity("");
     setState("");
     setCarpetArea("");
@@ -74,7 +77,7 @@ const AddProperty = () => {
     setBalcony('0');
     setTotalFloor("");
     setOnFloor("");
-    setTenantsPreferred("Independent");
+    setTenantsPreferred("");
     setSelectedItems([]);
     setSelectedBuildingItems([]);
     setSelectedImages([]);
@@ -140,9 +143,9 @@ const handleSubmit = async () => {
     Array.from(selectedImages).map(async (file) => {
       const formData = new FormData();
       formData.append('file', file);
-      formData.append('upload_preset', 'ypij3fxm');
+      formData.append('upload_preset', 'e1brdrjv');
 
-      const response = await fetch('https://api.cloudinary.com/v1_1/cloud-space/image/upload', {
+      const response = await fetch('https://api.cloudinary.com/v1_1/dd8qoyybu/image/upload', {
         method: 'POST',
         body: formData,
       });
@@ -230,7 +233,7 @@ const Upload= async(imgUrl)=>{
               <div class="mt-4 flex gap-2">
                <div >
                <label class="text-black" for="name">
-                  Three sharing rent
+                  Triple sharing rent
                 </label>
                 <input
                   placeholder="Rent per month"
@@ -277,6 +280,16 @@ const Upload= async(imgUrl)=>{
                   onChange={(e)=>setAddress(e.target.value)}
                   value={address}
                 ></textarea>
+                <label class="text-black" for="address">
+                 Building Name
+                </label>
+                <input
+                  placeholder="Building Name"
+                  class="w-full bg-gray-200 rounded-md border-gray-700 text-black px-2 py-1"
+                  id="address"
+                  onChange={(e)=>setBuildingName(e.target.value)}
+                  value={buildingName}
+                ></input>
 
               </div>
 
@@ -357,6 +370,7 @@ const Upload= async(imgUrl)=>{
                     value={flatType}
                   >
                     <option value="">null</option>
+                    <option value="Studio apt">Studio apt</option>
                     <option value="1RK">1RK</option>
                     <option value="1BHK">1BHK</option>
                     <option value="2BHK">2BHK</option>
@@ -445,7 +459,9 @@ const Upload= async(imgUrl)=>{
                       onChange={(e)=>setTenantsPreferred(e.target.value)}
                       value={tenantsPreferred}
                     >
-                      <option value="Independent">Both</option>
+
+                      <option value=""></option>
+                      <option value="Company">Company</option>
                       <option value="Bachelors">Bachelors</option>
                       <option value="Family">Family</option>
                     </select>

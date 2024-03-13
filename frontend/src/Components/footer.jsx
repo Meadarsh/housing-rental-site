@@ -5,7 +5,8 @@ import { RiTwitterXLine } from "react-icons/ri";
 
 const Footer = () => {
   return (
-    <div className=' h-[30vh] lg:h-[25vh] text-white flex w-full lg:flex-row flex-col gap-4 lg:gap-0 items-center bg-red-950 mt-8'>
+   <div>
+     <div className=' h-[30vh] lg:h-[25vh] text-white flex w-full lg:flex-row flex-col gap-4 lg:gap-0 items-center bg-red-950 mt-8'>
         <div className='logo lg:w-1/3  lg:h-[80%] flex items-center pl-3'>
           <h1 className=' text-3xl lg:text-[3vw]'>THEFLAT4U.com</h1>
         </div>
@@ -26,6 +27,8 @@ const Footer = () => {
             Phone no: +918652869869
         </div>
     </div>
+    <p className='text-center text-white bg-red-950 px-3 pb-5'>all rights reserved. © copyright 2024 flat4u.net </p>
+   </div>
   )
 }
 

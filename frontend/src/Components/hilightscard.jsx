@@ -14,7 +14,7 @@ const Hilightscard = ({data}) => {
         alt="N/A"
       />
        <Link to={'/contact'}>
-                <div className=" absolute bottom-2 right-2 flex justify-center items-center lg:px-3 hover:bg-red-700 py-2  text-white text-lg bg-red-800 rounded-xl gap-4"><IoCall/> Contact</div>
+                <div className=" absolute bottom-2 lg:right-2 left-2 lg:left-auto  flex justify-center items-center lg:px-3 hover:bg-red-700 py-2  text-white text-lg bg-red-800 rounded-xl gap-4"><IoCall/> Contact</div>
             </Link>
       </div>
      <div className='p-4'>

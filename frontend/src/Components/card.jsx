@@ -139,7 +139,8 @@ const Card = ({data}) => {
        
         <div>
             <p><span className="font-semibold">Address :</span>{data.address}</p>
-       
+            <p className="text-lg"><span className="font-semibold text-lg">Building name : </span>{data.buildingName}</p>
+           
         </div>
         <div>
             <Link to={'/contact'}>
