@@ -17,6 +17,7 @@ const FlatSchema = new Schema({
   fourSharingRent: String,
   securityDeposit: String,
   address: String,
+  buildingName:String,
   city: String,
   state: String,
   carpetArea: String,
@@ -33,7 +34,16 @@ const FlatSchema = new Schema({
   amenities: Object,
   imageUrl: Array,
 });
-const Flats = model("Flats", FlatSchema);
+const Flats = model("Flat", FlatSchema);
+
+const MessageSchema= new Schema({
+    firstname : String ,
+    lastname : String ,
+    email : String ,
+    phoneNumber : String ,
+    from:String
+})
+const Messages = model('Message',MessageSchema)
 
 cloudinary.config({
   cloud_name: "cloud-space",
@@ -86,7 +96,6 @@ app.get("/getall/:type", async (req, res) => {
       rentalType: type,
     });
 
-    console.log(data);
     res.send(data);
   } catch (error) {
     res.status(400).send(`Error getting data ${error}`);
@@ -141,6 +150,23 @@ app.post("/delete", async (req, res) => {
   }
 });
 
+app.post('/message',async(req,res)=>{
+  try {
+    const message=req.body.formData
+    await Messages.create(message)
+    res.send('sent')
+  } catch (error) {
+    console.log(error);
+  }
+})
+app.get('/message',async(req,res)=>{
+  try {
+    let messages=await Messages.find()
+    res.status(200).json(messages.reverse())
+  } catch (error) {
+    console.log(error);
+  }
+})
 
 app.listen(PORT, () => {
   console.log(`Server of housing is running on http://localhost:${PORT}`);
