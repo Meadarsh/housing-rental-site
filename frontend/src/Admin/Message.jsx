@@ -19,7 +19,7 @@ const Message = () => {
     Fetch();
   }, []);
   return (
-    <div className="flex lg:p-4 p-2 flex-wrap">
+    <div className="flex lg:p-4 p-2 flex-wrap gap-4">
       {message?.map((mes,index) => (
         <MessageCard key={index} message={mes} />
       ))}
