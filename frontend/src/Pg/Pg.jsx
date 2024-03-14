@@ -67,7 +67,7 @@ setSearched(filteredFlats)
               </SwiperSlide>
             ))}
           </Swiper>
-          <div className='w-full lg:px-[20%] px-10 pl-24   overflow-x-auto h-16 flex justify-center gap-2'>
+          <div className='w-full lg:px-[20%] px-10    overflow-x-auto h-16 flex justify-center gap-2'>
           <div className="flex items-center gap-3">
                     <label className="text-black" htmlFor="country">
                       Gender
@@ -96,7 +96,7 @@ setSearched(filteredFlats)
                       <option value="All">All</option>
                       <option value="Single sharing">Single sharing</option>
                       <option value="Twin sharing">Twin sharing</option>
-                      <option value="Three sharing">Three sharing</option>
+                      <option value="Triple sharing">Triple sharing</option>
                       <option value="Four sharing">Four sharing</option>
                     </select>
                   </div>

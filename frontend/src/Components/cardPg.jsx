@@ -58,23 +58,23 @@ const CardPg = ({data}) => {
 
        
            </div>}
-     <div className="flex justify-between">
+     <div className="flex ">
      <div>
-      <div className="flex leading-tight gap-2">
-     {data.singleSharingRent&&<div className="flex flex-col items-center  rounded-lg p-1 border">
-      <span className=" text-md font-semibold">Single sharing</span>
+      <div className="flex flex-wrap lg:flex-nowrap  leading-tight gap-2">
+     {data.singleSharingRent&&<div className="flex flex-col w-40  items-center  rounded-lg p-1 border">
+      <span className=" text-md font-semibold text-nowrap">Single sharing</span>
       <h1>{data.singleSharingRent}/month</h1>
      </div>}
-     {data.twinSharingRent&&<div className="flex flex-col items-center  rounded-lg p-1 border">
-      <span className=" text-md font-semibold">Twin sharing</span>
+     {data.twinSharingRent&&<div className="flex flex-col w-40 items-center  rounded-lg p-1 border">
+      <span className=" text-md font-semibold text-nowrap">Twin sharing</span>
       <h1>{data.twinSharingRent}/month</h1>
      </div>}
-    {data.threeSharingRent&&<div className="flex flex-col items-center  rounded-lg p-1 border">
-      <span className=" text-md font-semibold">Three sharing</span>
+    {data.threeSharingRent&&<div className="flex flex-col w-40 items-center  rounded-lg p-1 border">
+      <span className=" text-md font-semibold text-nowrap">Triple sharing</span>
       <h1>{data.threeSharingRent}/month</h1>
      </div>}
-     {data.fourSharingRent&&<div className="flex flex-col items-center  rounded-lg p-1 border">
-      <span className=" text-md font-semibold">Four sharing</span>
+     {data.fourSharingRent&&<div className="flex flex-col w-40 items-center  rounded-lg p-1 border">
+      <span className=" text-md font-semibold text-nowrap">Four sharing</span>
       <h1>{data.fourSharingRent}/month</h1>
      </div>}
 </div>
@@ -88,7 +88,7 @@ const CardPg = ({data}) => {
             Others
           </div> */}
      </div>
-        <div className="pr-2 mt-6 relative flex whitespace-nowrap no-scrollbar overflow-y-visible overflow-x-auto scrollbarnone  gap-2">
+        <div className="pr-2 mt-6 relative flex   whitespace-nowrap no-scrollbar overflow-y-visible overflow-x-scroll scrollbarnone  gap-2">
   
          {!(data.carpetArea === '0') && (<div className="flex leading-none gap-2 items-center border border-red-800 p-1 rounded-md">
          <MdOutlinePeople className="lg:text-2xl text-xl" />
@@ -121,8 +121,9 @@ const CardPg = ({data}) => {
        <div className="flex lg:gap-4 gap-3 justify-between text-sm flex-col lg:flex-row lg:mt-4 lg:w-[95%]">
        
         <div>
+           <p><span className="font-semibold text-xl">Building name :</span>{data.buildingName}</p>
+
             <p><span className="font-semibold">Address :</span>{data.address}</p>
-            <p><span className="font-semibold text-xl">Building name :</span>{data.buildingName}</p>
 
         </div>
         <div>

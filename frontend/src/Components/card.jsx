@@ -84,7 +84,7 @@ const Card = ({data}) => {
         </p>
         <p className="lg:font-semibold text-red-800 -mt-1">{data.tenantsPreferred}</p>
        </div>
-       <div onClick={()=>setMoreOpen(!moreOpen)} className=" cursor-pointer shadow-sm rounded-lg text-red-700  h-10 px-1  bg-slate-100 flex items-center">
+       <div onClick={()=>setMoreOpen(!moreOpen)} className=" cursor-pointer shadow-sm w-24 rounded-lg text-red-700  h-10 px-1  bg-slate-100 flex items-center">
             Others
           </div>
      </div>
@@ -138,8 +138,9 @@ const Card = ({data}) => {
        <div className="flex lg:gap-4 gap-3 justify-between text-sm flex-col lg:flex-row lg:mt-4 lg:w-[95%]">
        
         <div>
+        <p className="text-lg"><span className="font-semibold text-lg">Building name : </span>{data.buildingName}</p>
+
             <p><span className="font-semibold">Address :</span>{data.address}</p>
-            <p className="text-lg"><span className="font-semibold text-lg">Building name : </span>{data.buildingName}</p>
            
         </div>
         <div>

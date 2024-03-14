@@ -443,7 +443,7 @@ const Upload= async(imgUrl)=>{
                     <option value="0">null</option>
                     <option value="Single sharing">Single sharing</option>
                     <option value="Twin sharing">Twin sharing</option>
-                    <option value="Three sharing">Three sharing</option>
+                    <option value="Triple sharing">Triple sharing</option>
                     <option value="Four sharing">Four sharing</option>
                   </select>
                 </div>}

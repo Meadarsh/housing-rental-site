@@ -66,7 +66,7 @@ setSearched(filteredFlats)
               </SwiperSlide>
             ))}
           </Swiper>
-          <div className='w-full px-10 pl-24 lg:px-0  overflow-x-auto h-16 flex justify-center gap-4 lg:gap-8'>
+          <div className='w-full px-10 pl-24 lg:px-10  overflow-x-auto h-16 flex justify-center gap-4 lg:gap-8'>
           <div className="flex items-center gap-3">
                     <label className="text-black" htmlFor="country">
                       Furnishing
