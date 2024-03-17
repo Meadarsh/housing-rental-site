@@ -13,7 +13,6 @@ const NavBar = () => {
     <>
     <div className=" backdrop-blur-sm mainNav w-[100vw] left-0 lg:h-20 h-16 z-50 fixed top-0 flex justify-between items-center lg:px-10 px-8">
       <div><img className="lg:w-14 w-12" src="/logo.jpg" alt="" /></div>
-      <Link to='/admin'>Admin</Link>
       <div className="lg:flex justify-end gap-4 hidden  w-[20%] ">
        
           {!(location.pathname == "/")&&(

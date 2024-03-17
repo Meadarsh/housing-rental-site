@@ -35,7 +35,7 @@ const LandingPage = () => {
         </Swiper>
         <div className="txt lg:w-[60%] absolute top-[10vh] left-8 z-10">
           <h1 className=" lg:leading-snug font-semibold text-xl lg:text-[2vw]">
-            <span className="text-red-800 font-bold text-4xl lg:text-[5vw]">THEFLAT4U</span>
+            <span className="text-red-800 font-bold text-4xl lg:text-[5vw]">FLAT4U</span>
             <br /> Discover Your Home in the Heart of India!
           </h1>
         </div>
